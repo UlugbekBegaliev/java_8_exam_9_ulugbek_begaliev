@@ -5,10 +5,13 @@ import com.begaliev.java_8_exam_9_ulugbek_begaliev.exceptions.CompanyAlreadyRegi
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.exceptions.CompanyNotFoundException;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.Company;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.CompanyRegisterForm;
+import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.PasswordManager;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.repositories.CompanyRepository;
+import com.begaliev.java_8_exam_9_ulugbek_begaliev.repositories.PasswordManagerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,8 @@ import org.springframework.stereotype.Service;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
-    private final PasswordEncoder encoder;
+    private final PasswordManagerRepository passwordManagerRepository;
+    public PasswordEncoder encoder;
 
     public Page<CompanyDTO> getAll(Pageable pageable){
         return companyRepository.findAll(pageable).map(CompanyDTO::from);
@@ -50,5 +54,13 @@ public class CompanyService {
 
     public void add(Company company) {
         companyRepository.findByEmail(company.getEmail());
+    }
+
+    public void resetPassword(String token, String newPassword){
+        PasswordManager resetPassword = passwordManagerRepository.findByToken(token).get();
+        Company company = companyRepository.findById(resetPassword.getCompany().getId()).get();
+        company.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+
+        companyRepository.save(company);
     }
 }
