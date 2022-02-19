@@ -12,7 +12,11 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     public Client findClientById(Integer id){
-        return clientRepository.
+        return clientRepository.findClientById(id);
+    }
+
+    public void saveClient(Client client){
+        clientRepository.save(client);
     }
 
 }
