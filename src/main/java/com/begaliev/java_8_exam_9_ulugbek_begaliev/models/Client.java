@@ -25,7 +25,7 @@ public class Client {
     @Column(name = "locked",columnDefinition = "boolean default true")
     private Boolean isLocked  ;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Ticket> tickets;
 
     @Override
