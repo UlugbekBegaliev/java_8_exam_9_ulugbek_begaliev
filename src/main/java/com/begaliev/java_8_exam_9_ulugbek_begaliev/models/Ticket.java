@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,9 +22,6 @@ public class Ticket {
 
     @Column(name = "cost")
     private double cost;
-
-    @Column(name = "company_name")
-    private String companyName;
 
     @Column(name = "destination")
     private String finishPoint;
@@ -53,11 +51,15 @@ public class Ticket {
     @JoinColumn(name = "flightId")
     private Flight flight;
 
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private List<Company> companies;
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+        result = prime * result + ((companies == null) ? 0 : companies.hashCode());
         return result;
     }
 
@@ -73,11 +75,11 @@ public class Ticket {
             return false;
         }
         final Ticket other = (Ticket) obj;
-        if (companyName == null) {
-            if (other.companyName != null) {
+        if (companies == null) {
+            if (other.companies != null) {
                 return false;
             }
-        } else if (!companyName.equals(other.companyName)) {
+        } else if (!companies.equals(other.companies)) {
             return false;
         }
         return true;

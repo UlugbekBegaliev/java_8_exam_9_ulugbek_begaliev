@@ -38,7 +38,7 @@ public class Client {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((fio_client == null) ? 0 : fio_client.hashCode());
+        result = prime * result + ((fullname == null) ? 0 : fullname.hashCode());
         return result;
     }
 
@@ -51,10 +51,10 @@ public class Client {
         if (getClass() != obj.getClass())
             return false;
         final Client other = (Client) obj;
-        if (fio_client == null) {
-            if (other.fio_client != null)
+        if (fullname == null) {
+            if (other.fullname != null)
                 return false;
-        } else if (!fio_client.equals(other.fio_client))
+        } else if (!fullname.equals(other.fullname))
             return false;
         return true;
     }

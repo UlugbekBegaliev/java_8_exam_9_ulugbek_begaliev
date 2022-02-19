@@ -24,9 +24,6 @@ public class Flight {
     @Column(name = "cost")
     private double cost;
 
-    @Column(name = "company_name")
-    private String companyName;
-
     @Column(name = "destination")
     private String finishPoint;
 
@@ -52,4 +49,8 @@ public class Flight {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Ticket> tickets;
+
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private List<Company> companies;
 }
