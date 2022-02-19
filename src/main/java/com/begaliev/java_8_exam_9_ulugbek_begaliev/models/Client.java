@@ -28,6 +28,12 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Ticket> tickets;
 
+    @Column(name = "total",columnDefinition = "integer default 0")
+    private int totalBuy;
+
+    @Column(name = "bonuses",columnDefinition = "integer default 0")
+    private int cashBack;
+
     @Override
     public int hashCode() {
         final int prime = 31;
