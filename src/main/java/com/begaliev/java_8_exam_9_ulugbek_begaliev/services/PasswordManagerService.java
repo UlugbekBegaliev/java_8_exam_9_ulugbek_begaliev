@@ -16,6 +16,8 @@ public class PasswordManagerService {
 
     private final PasswordManagerRepository passwordManagerRepository;
     private final CompanyRepository companyRepository;
+    private final EmailServiceImpl emailService;
+
 
     public void createToken(String email){
 
@@ -29,7 +31,7 @@ public class PasswordManagerService {
         passwordManagerRepository.deleteAll();
         passwordManagerRepository.save(token);
 
-        emailService.sendSimpleMessage(customer.getEmail(),
+        emailService.sendSimpleMessage(company.getEmail(),
                 "onlineshop | Password Recovery", "Token: " + token.getToken());
     }
 

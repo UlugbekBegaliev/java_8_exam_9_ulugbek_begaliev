@@ -1,8 +1,10 @@
 package com.begaliev.java_8_exam_9_ulugbek_begaliev.controllers;
 
+import com.begaliev.java_8_exam_9_ulugbek_begaliev.dtos.CompanyDTO;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.exceptions.FlightNotFoundException;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.exceptions.TicketNotFoundException;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.Client;
+import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.Company;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.Flight;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.models.Ticket;
 import com.begaliev.java_8_exam_9_ulugbek_begaliev.services.ClientService;
@@ -112,7 +114,6 @@ public class TicketController {
             }
 
             ticket.setCost(cost);
-            ticket.setCompanyName(flight.getCompanyName());
             ticket.setFinishPoint(flight.getFinishPoint());
             ticket.setStartPoint(flight.getStartPoint());
             ticket.setReserved(true);
@@ -171,7 +172,6 @@ public class TicketController {
         if (flight.isActive()) {
 
             ticket.setCost(cost);
-            ticket.setCompanyName(flight.getCompanyName());
             ticket.setFinishPoint(flight.getFinishPoint());
             ticket.setStartPoint(flight.getStartPoint());
             ticket.setReserved(true);
