@@ -20,7 +20,7 @@ public class Client {
     private Integer id;
 
     @Column(name = "fio_client")
-    private String fio_client;
+    private String fullname;
 
     @Column(name = "locked",columnDefinition = "boolean default true")
     private Boolean isLocked  ;
